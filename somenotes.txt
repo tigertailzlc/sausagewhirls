@@ -1,0 +1,11 @@
+Not that I understand ANY of this tutorial, but I thought I would write down some questions so I can eventually investigate them. Starting a bit late but here 
+
+why
+
+is the env var FLASK_APP = sausage.sausage? 
+
+and why 
+
+is setup.py written the way it is with name = sausage and packages = sausage I mean like what does it all meannnnnn 
+
+need to understand setuptools and python packages and directory structures and and and and and 
