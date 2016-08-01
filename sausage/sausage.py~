@@ -20,7 +20,7 @@ app = Flask(__name__)
 # it's not in the example source, and it doesn't make sense anyway--
 # tutorial says to provide the from_object() method with the import name 
 # of a module, but there's no other module I'm working with, and __name__ 
-# just gives "sausage.py"... right? 
+# just gives "sausage.py"... right? Or "__main__" ??? 
 # OK, I'll uncomment it and run >python sausage.py instead of >flask run 
 # and if the error says "main" or something instead of "sausage" then 
 # I've got it right. Update: JK do not want to use virtualenv tqvm 
