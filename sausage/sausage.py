@@ -8,7 +8,7 @@
 import os
 import sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
-     render_template, flash 
+     render_template, flash, current_app 
 
 # ZLC: I'm changing all instances of "flaskr" to "sausage" :) 
 
@@ -128,10 +128,16 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port=port)
     #I have to initialize the database first, right? 
     #But instead of using the CLI I'll just run the fn directly:
-    init_db()
+    #Frankenstein grafting from http://flask.pocoo.org/docs/0.11/testing/
+    with app.app_context(): 
+        init_db()
     print 'Initialized the database. Whooop de dooo dooo.'
 
+
+
+
 # Let's see how that goes... 
+
 # Runtime error: Working outside of application context. I've decided this 
 # is because I tried to init_db() before app.run, so the g object 
 # (app context) is not an object yet?? When you ran flask initdbyo, 
@@ -139,3 +145,8 @@ if __name__ == "__main__":
 # flask script, and when this command executes, Flask automatically 
 # creates an app context. 
 # I'll try switching the order, but that's a highly iffy approach... 
+
+# Wait, a more helpful (less truncated...) error message! 
+# "...to solve this set up an application context with app.app_context(). 
+# See the return self.__local() documentation for more information. 
+# http://flask.pocoo.org/docs/0.11/appcontext/#app-context
