@@ -122,18 +122,16 @@ def logout():
 # so here goes 
 
 if __name__ == "__main__": 
-    #let's try screwing with this. Having read Python 2.7 os documentation, 
+    #I have to initialize the database first, right? 
+    #But instead of using the CLI I'll just run the fn directly: 
+    #Frankenstein grafting from http://flask.pocoo.org/docs/0.11/testing/ 
+    with app.app_context():
+        init_db()
+    print 'Initialized the database. Whooop de dooo dooo.' 
+   #let's try screwing with this. Having read Python 2.7 os documentation, 
     #replacing os.environ.get with os.getenv. 
     port = int(os.getenv('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
-    #I have to initialize the database first, right? 
-    #But instead of using the CLI I'll just run the fn directly:
-    #Frankenstein grafting from http://flask.pocoo.org/docs/0.11/testing/
-    with app.app_context(): 
-        init_db()
-    print 'Initialized the database. Whooop de dooo dooo.'
-
-
 
 
 # Let's see how that goes... 
