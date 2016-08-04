@@ -122,13 +122,20 @@ def logout():
 # so here goes 
 
 if __name__ == "__main__": 
-    #I have to initialize the database first, right? 
-    #But instead of using the CLI I'll just run the fn directly: 
-    init_db()
-    print 'Initialized the database. Whooop de dooo dooo.'
     #let's try screwing with this. Having read Python 2.7 os documentation, 
     #replacing os.environ.get with os.getenv. 
     port = int(os.getenv('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+    #I have to initialize the database first, right? 
+    #But instead of using the CLI I'll just run the fn directly:
+    init_db()
+    print 'Initialized the database. Whooop de dooo dooo.'
 
 # Let's see how that goes... 
+# Runtime error: Working outside of application context. I've decided this 
+# is because I tried to init_db() before app.run, so the g object 
+# (app context) is not an object yet?? When you ran flask initdbyo, 
+# the app.cli.command() decorater registered a new command with the 
+# flask script, and when this command executes, Flask automatically 
+# creates an app context. 
+# I'll try switching the order, but that's a highly iffy approach... 
