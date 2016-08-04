@@ -1,1 +1,1 @@
-web: python sausage.py
+web: python sausage/sausage.py
