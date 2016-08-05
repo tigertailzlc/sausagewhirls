@@ -126,7 +126,8 @@ if __name__ == "__main__":
     #But instead of using the CLI I'll just run the fn directly: 
     #Frankenstein grafting from http://flask.pocoo.org/docs/0.11/testing/ 
     with app.app_context():
-        init_db()
+        if not hasattr(g, 'sqlite_db'):
+            init_db()
     print 'Initialized the database. Whooop de dooo dooo.' 
    #let's try screwing with this. Having read Python 2.7 os documentation, 
     #replacing os.environ.get with os.getenv. 
@@ -148,3 +149,6 @@ if __name__ == "__main__":
 # "...to solve this set up an application context with app.app_context(). 
 # See the return self.__local() documentation for more information. 
 # http://flask.pocoo.org/docs/0.11/appcontext/#app-context
+
+# Your dyno sleeps after 30 minutes of inactivity, and you re-initialize 
+# the database every time the dyno goes up again. Modifying to try to fix 
